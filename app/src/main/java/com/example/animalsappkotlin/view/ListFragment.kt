@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.animalsappkotlin.R
 import com.example.animalsappkotlin.model.Animals
+import com.example.animalsappkotlin.util.SharedPreferenceHelper
 import com.example.animalsappkotlin.viewmodel.ListViewModel
 import kotlinx.android.synthetic.main.fragment_list.*
 
@@ -67,7 +68,7 @@ class ListFragment : Fragment() {
             animalList.visibility = View.GONE
             listError.visibility = View.GONE
             loadingView.visibility = View.VISIBLE
-            viewModel.refresh()
+            viewModel.hardRefresh()
             swipeRefreshLayout.isRefreshing = false
         }
 
