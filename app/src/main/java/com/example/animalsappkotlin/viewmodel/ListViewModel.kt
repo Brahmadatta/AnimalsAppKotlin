@@ -43,6 +43,7 @@ class ListViewModel(application: Application) : AndroidViewModel(application){
     fun hardRefresh()
     {
         loading.value = true
+        loadError.value = false
         getKey()
     }
 
