@@ -3,6 +3,7 @@ package com.example.animalsappkotlin.view
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.example.animalsappkotlin.R
 import com.example.animalsappkotlin.model.Animals
@@ -33,6 +34,10 @@ class AnimalListAdapter(private val animalList: ArrayList<Animals>) :
 
         holder.view.animalName.text = animalList[position].name
         holder.view.animalImage.loadImage(animalList[position].imageUrl, getProgressDrawable(holder.view.context))
+        holder.view.animalLayout.setOnClickListener {
+            val action = ListFragmentDirections.actionDetail(animalList[position])
+            Navigation.findNavController(holder.view).navigate(action)
+        }
     }
 
     override fun getItemCount(): Int {
