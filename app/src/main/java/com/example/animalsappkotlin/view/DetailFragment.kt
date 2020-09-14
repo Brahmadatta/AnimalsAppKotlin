@@ -15,6 +15,7 @@ import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
 import com.example.animalsappkotlin.R
 import com.example.animalsappkotlin.databinding.FragmentDetailBinding
+import com.example.animalsappkotlin.model.AnimalPalette
 import com.example.animalsappkotlin.model.Animals
 import com.example.animalsappkotlin.util.getProgressDrawable
 import com.example.animalsappkotlin.util.loadImage
@@ -43,9 +44,9 @@ class DetailFragment : Fragment() {
             animal = DetailFragmentArgs.fromBundle(it).animal
         }
 
-        context?.let {
-            dataBinding.animalImage.loadImage(animal?.imageUrl, getProgressDrawable(it))
-        }
+//        context?.let {
+//            dataBinding.animalImage.loadImage(animal?.imageUrl, getProgressDrawable(it))
+//        } no need after binding from util class to layout
 
 
         animal?.imageUrl?.let {
@@ -69,7 +70,7 @@ class DetailFragment : Fragment() {
                         .generate(){ palette ->
 
                             val intColor = palette?.lightMutedSwatch?.rgb ?: 0
-                            dataBinding.animalLayout.setBackgroundColor(intColor)
+                            dataBinding.palette = AnimalPalette(intColor)
                         }
                 }
 

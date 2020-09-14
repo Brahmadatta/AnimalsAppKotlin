@@ -9,10 +9,14 @@
             name="animal"
             type="com.example.animalsappkotlin.model.Animals" />
 
+        <variable
+            name="palette"
+            type="com.example.animalsappkotlin.model.AnimalPalette" />
+
     </data>
 
     <LinearLayout
-        android:id="@+id/animalLayout"
+        android:background="@{palette.color}"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center_horizontal"
@@ -21,10 +25,10 @@
 
 
         <ImageView
-            android:id="@+id/animalImage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:minHeight="200dp"
+            android:imageUrl="@{animal.imageUrl}"
             android:scaleType="center" />
 
         <TextView
