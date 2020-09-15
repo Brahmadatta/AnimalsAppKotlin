@@ -3,7 +3,10 @@ package com.example.animalsappkotlin.viewmodel
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import com.example.animalsappkotlin.di.AppModule
+import com.example.animalsappkotlin.di.CONTEXT_APP
 import com.example.animalsappkotlin.di.DaggerViewModelComponent
+import com.example.animalsappkotlin.di.TypeOfContext
 import com.example.animalsappkotlin.model.AnimalApiService
 import com.example.animalsappkotlin.model.Animals
 import com.example.animalsappkotlin.model.ApiKey
@@ -12,6 +15,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
+import retrofit2.http.Field
 import javax.inject.Inject
 
 class ListViewModel(application: Application) : AndroidViewModel(application){
@@ -25,13 +29,17 @@ class ListViewModel(application: Application) : AndroidViewModel(application){
     @Inject
     lateinit var apiService : AnimalApiService
 
-    private val prefs = SharedPreferenceHelper(getApplication())
-
+    @Inject
+    @field:TypeOfContext(CONTEXT_APP)
+    lateinit var prefs : SharedPreferenceHelper
     private var invalidApiKey = false
 
 
     init {
-        DaggerViewModelComponent.create().inject(this)
+        DaggerViewModelComponent.builder()
+            .appModule(AppModule(getApplication()))
+            .build()
+            .inject(this)
     }
 
 
